@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  due_date: 2020-11-23 18:20:33
+  is_archived: false
+  todo_list: one
+
+two:
+  name: MyString
+  due_date: 2020-11-23 18:20:33
+  is_archived: false
+  todo_list: two
