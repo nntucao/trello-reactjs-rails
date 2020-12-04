@@ -3,9 +3,8 @@ import axios from 'axios';
 
 const BoardList = props => {
     useEffect(() => {
-        axios.get('http://localhost:3001/api/v1/boards')
-        //.then(res => setBoards(res.data))
-        .then(res => console.log(res))
+        axios.get('http://localhost:3000/api/v1/boards')
+        .then(res => setBoards(res.data))
         .catch(error => console.log(error));
     }, []);
 

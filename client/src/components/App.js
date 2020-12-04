@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import BoardList from './components/BoardList'; 
+import BoardList from './BoardList'; 
 
 function App() {
   return (

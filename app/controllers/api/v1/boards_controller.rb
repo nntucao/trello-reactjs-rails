@@ -1,18 +1,19 @@
 class Api::V1::BoardsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  
   def index
     @boards = current_user.boards.all
   end
 
   def show
-    if authorized?
+    #if authorized?
       respond_to do |format|
         format.json { render :show }
       end
-    else
-      handle_unauthorized
-    end
+    #else
+      #handle_unauthorized
+    #end
   end
 
   def create
