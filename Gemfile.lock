@@ -109,6 +109,7 @@ GEM
     puma (3.12.6)
     puma (3.12.6-java)
     rack (2.2.3)
+    rack-cors (0.4.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -221,6 +222,7 @@ DEPENDENCIES
   devise (~> 4.7, >= 4.7.1)
   jbuilder (~> 2.5)
   puma (~> 3.7)
+  rack-cors (~> 0.4.0)
   rails (~> 5.1.7)
   react-rails
   sass-rails (~> 5.0)

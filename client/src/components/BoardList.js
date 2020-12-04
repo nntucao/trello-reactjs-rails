@@ -3,8 +3,10 @@ import axios from 'axios';
 
 const BoardList = props => {
     useEffect(() => {
-        axios.get('/api/v1/boards/4')
-        .then(res => setBoards(res.data))
+        axios.get('http://localhost:3001/api/v1/boards')
+        //.then(res => setBoards(res.data))
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
     }, []);
 
     const [boards, setBoards] = useState([]); 
