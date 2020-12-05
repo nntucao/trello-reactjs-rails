@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios'; 
 
-const BoardList = props => {
+const Board = props => {
     useEffect(() => {
         axios.get('http://localhost:3000/api/v1/boards')
         .then(res => setBoards(res.data))
@@ -23,5 +23,5 @@ const BoardList = props => {
         </div>
     )
 }; 
-export default BoardList;
+export default Board;
 

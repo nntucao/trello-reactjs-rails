@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  due_date: 2020-12-05 15:29:28
+  is_archived: false
+  position_in_tasklist: 1
+  task_list: one
+
+two:
+  name: MyString
+  due_date: 2020-12-05 15:29:28
+  is_archived: false
+  position_in_tasklist: 1
+  task_list: two
