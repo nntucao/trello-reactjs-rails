@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios'; 
-import TaskCard from './TaskCard'; 
+import TaskList from './TaskList';
 
-const Board = props => {
+const Board = ({name, task_lists}) => {
     useEffect(() => {
         axios.get('http://localhost:3000/api/v1/boards')
         .then(res => setBoards(res.data))
@@ -14,15 +14,9 @@ const Board = props => {
     return (
         <div>
             <div style={styles.container}>
-                This is a Board
+                {name}
             
-            {boards.map((board, index) => (
-                <div key={index}>
-                    {board.name} | {board.isArchived} | {board.uid}
-                </div>
-                ))}
-
-            <TaskCard />
+            <TaskList />
             </div>
         </div>
     )

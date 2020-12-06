@@ -1,15 +1,24 @@
 import React from 'react'; 
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
-const TaskCard = () => {
+const TaskCard = ({ name }) => {
     return (
-        <Card>
-            <Typography gutterBottom>
-                This is a task card
-            </Typography>
+        <Card style={styles.cardContainer}>
+            <CardContent>
+                <Typography gutterBottom>
+                    { name }
+                </Typography>
+            </CardContent>
         </Card>
     );
+}
+
+const styles = {
+    cardContainer: {
+        marginBottom: 8 
+    }
 }
 
 export default TaskCard; 

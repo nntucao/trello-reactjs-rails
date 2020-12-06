@@ -5,11 +5,11 @@ const initialState = [
         task_lists: [
             {
                 id: 0, 
-                name: "First Task Card"
+                name: "First Task List"
             }, 
             {
                 id: 1, 
-                name: "Second Task Card"
+                name: "Second Task List"
             }
         ]
     }
