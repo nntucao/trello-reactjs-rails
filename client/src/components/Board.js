@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios'; 
+import TaskCard from './TaskCard'; 
 
 const Board = props => {
     useEffect(() => {
@@ -12,16 +13,28 @@ const Board = props => {
 
     return (
         <div>
-            <div> Hello From Board List </div>
-            <div className="boards-list">
+            <div style={styles.container}>
+                This is a Board
+            
             {boards.map((board, index) => (
                 <div key={index}>
                     {board.name} | {board.isArchived} | {board.uid}
                 </div>
                 ))}
+
+            <TaskCard />
             </div>
         </div>
     )
 }; 
+
+const styles = {
+    container: {
+      backgroundColor: "#ccc", 
+      borderRadius: 3, 
+      width: 300
+    }
+}
+
 export default Board;
 

@@ -6,7 +6,7 @@ const TaskCard = () => {
     return (
         <Card>
             <Typography gutterBottom>
-                This is a card
+                This is a task card
             </Typography>
         </Card>
     );

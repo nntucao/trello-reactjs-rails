@@ -1,23 +1,23 @@
 import './App.css';
 import Board from './Board'; 
-import TaskCard from './TaskCard'; 
+import { connect } from 'react-redux'; 
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div style={styles.container}>
-      <h1>Boards</h1>
-      <Board />
-      <TaskCard />
-    </div>
-  );
-}
-
-const styles = {
-  container: {
-    backgroundColor: "#ccc", 
-    borderRadius: 3, 
-    width: 300
+class App extends Component {
+  render() {
+    const { boards } = this.props;  
+    return (
+      <div className="App">
+        Board Name
+      { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )}
+      </div>
+      
+    );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  boards: state.task_boards
+})
+
+export default connect(mapStateToProps)(App);
