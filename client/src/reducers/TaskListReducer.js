@@ -15,7 +15,7 @@ const initialState = [
     }, 
     {
         name: "Second List Name",
-        id: 0, 
+        id: 1, 
         task_cards: [
             {
                 id: 0, 

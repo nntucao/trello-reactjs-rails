@@ -1,20 +1,22 @@
-import './App.css';
-
 import { connect } from 'react-redux'; 
-import { Component } from 'react';
+import { React, Component } from 'react';
 import Board from './Board'; 
 import TaskList from './TaskList';
+
+import ActionButton from './ActionButton'; 
 
 class App extends Component {
   render() {
     //const { boards } = this.props;  
     const { task_lists } = this.props; 
     return (
-      <div className="App"> Board Name
+      <div> Board Name
         <div style={styles.listContainer}>
           {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
-          { task_lists.map(list => <TaskList name={list.name} task_cards={list.task_cards} />)}
+          { task_lists.map(list => <TaskList key={list.id} name={list.name} task_cards={list.task_cards} />)}
+          <ActionButton list />
         </div>
+        
       </div>
       
     );

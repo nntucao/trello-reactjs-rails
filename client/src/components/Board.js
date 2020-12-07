@@ -12,12 +12,8 @@ const Board = ({name, task_lists}) => {
     const [boards, setBoards] = useState([]); 
 
     return (
-        <div>
-            <div style={styles.container}>
-                {name}
-            
+        <div style={styles.container}>{name}
             <TaskList />
-            </div>
         </div>
     )
 }; 

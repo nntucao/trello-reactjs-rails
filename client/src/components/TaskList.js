@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'; 
-import axios from 'axios'; 
 import TaskCard from './TaskCard'; 
+import ActionButton from './ActionButton'; 
 
 const TaskList = ({ name, task_cards }) => {
     return (
-        <div>
-            <div style={styles.container}>
-            { name }
-            { task_cards.map(task_card => <TaskCard name={task_card.name} />) }
+        <div style={styles.container}>
+            <div>
+                { name }
+                { task_cards.map(task_card => <TaskCard key={task_card.id} name={task_card.name} />) }
+            </div>
+            <div>
+                <ActionButton card />
             </div>
         </div>
     )
@@ -19,6 +22,7 @@ const styles = {
       borderRadius: 3, 
       width: 300, 
       padding: 8, 
+      height: '100%',
       marginRight: 8
     }
 }
