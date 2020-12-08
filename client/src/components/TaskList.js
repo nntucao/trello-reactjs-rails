@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import TaskCard from './TaskCard'; 
 import ActionButton from './ActionButton'; 
 
-const TaskList = ({ name, task_cards }) => {
+const TaskList = ({ name, task_cards, listID }) => {
     return (
         <div style={styles.container}>
-            <div>
                 { name }
-                { task_cards.map(task_card => <TaskCard key={task_card.id} name={task_card.name} />) }
-            </div>
-            <div>
-                <ActionButton card />
-            </div>
+                { task_cards.map(task_card => (<TaskCard key={task_card.id} text={task_card.text} /> )) }
+                <ActionButton listID={listID} />
         </div>
     )
 };

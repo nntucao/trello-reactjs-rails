@@ -3,12 +3,12 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 
-const TaskCard = ({ name }) => {
+const TaskCard = ({ text }) => {
     return (
         <Card style={styles.cardContainer}>
             <CardContent>
                 <Typography gutterBottom>
-                    { name }
+                    { text }
                 </Typography>
             </CardContent>
         </Card>

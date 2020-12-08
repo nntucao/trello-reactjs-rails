@@ -1,8 +1,12 @@
 import { React, Component } from 'react'; 
+import { connect } from 'react-redux';
+
 import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
 import Textarea from 'react-textarea-autosize';
 import Button from '@material-ui/core/Button'; 
+
+import { addList, addCard } from '../actions';
 
 class ActionButton extends Component {
 
@@ -23,11 +27,37 @@ class ActionButton extends Component {
         })
     };
 
-    handleChangeInput = (e) => {
+    handleChangeInput = e => {
         this.setState({
             text: e.target.value
         });
     };
+
+    handleAddList = () => {
+        const { dispatch } = this.props; 
+        const { text } = this.state; 
+
+        if (text) {
+            this.setState({
+                text: ""
+            })
+            dispatch(addList(text));
+        }
+        return; 
+    };
+
+    handleAddCard = () => {
+        const { dispatch, listID } = this.props; 
+        const { text } = this.state; 
+
+        if (text) {
+            this.setState({
+                text: ""
+            })
+            dispatch(addCard(listID, text));
+        }
+        return; 
+    }
 
     renderAction = () => {
         const { list } = this.props; 
@@ -36,19 +66,19 @@ class ActionButton extends Component {
         const buttonTextColor = list ? 'white' : 'inherit'; 
         const buttonTextBackground = list ? 'rgba(0,0,0,.15)' : 'inherit'; 
 
-    return (
-        <div 
-            onClick={this.openForm}
-            style={{
-            ...styles.openFormButtonGroup, 
-            opacity: buttonTextOpacity, 
-            color: buttonTextColor, 
-            background: buttonTextBackground
-        }}>
-            <Icon>add</Icon>
-            <div>{actionName}</div>
-        </div>
-    )
+        return (
+            <div 
+                onClick={this.openForm}
+                style={{
+                ...styles.openFormButtonGroup, 
+                opacity: buttonTextOpacity, 
+                color: buttonTextColor, 
+                background: buttonTextBackground
+            }}>
+                <Icon>add</Icon>
+                <div>{actionName}</div>
+            </div>
+        )
 
     }
 
@@ -77,15 +107,16 @@ class ActionButton extends Component {
                         overflow: 'hidden', 
                         width: '100%', 
                         outline: 'none', 
-                        border: 'none' 
-                }} />
+                        border: 'none' }} />
                </Card>
                <div style={styles.formButtonGroup}>
                     <Button 
+                            onMouseDown={list ? this.handleAddList : this.handleAddCard }
                             variant='contained'
+                            color='secondary'
                             style={{ color: 'white', backgroundCoulor: '#5aac44'}}> 
-                            {buttonTitle} 
-                        </Button>
+                            {buttonTitle} {" "}
+                    </Button>
                     <Icon style={{ marginLeft: 8, cursor: 'pointer'}}>close</Icon>
                 </div>
             </div>
@@ -112,9 +143,6 @@ const styles = {
         display: 'flex', 
         alignItems: 'center'
     }
-
-    
-    
 }
 
-export default ActionButton; 
+export default connect() (ActionButton); 

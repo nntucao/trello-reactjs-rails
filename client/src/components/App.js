@@ -13,7 +13,7 @@ class App extends Component {
       <div> Board Name
         <div style={styles.listContainer}>
           {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
-          { task_lists.map(list => <TaskList key={list.id} name={list.name} task_cards={list.task_cards} />)}
+          { task_lists.map(list => <TaskList listID={list.id} key={list.id} name={list.name} task_cards={list.task_cards} />)}
           <ActionButton list />
         </div>
         
