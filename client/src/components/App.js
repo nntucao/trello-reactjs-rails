@@ -1,23 +1,31 @@
 import { connect } from 'react-redux'; 
 import { React, Component } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
+
 import Board from './Board'; 
 import TaskList from './TaskList';
-
 import ActionButton from './ActionButton'; 
 
 class App extends Component {
+
+  onDragEnd = () => {
+
+  }
+
   render() {
     //const { boards } = this.props;  
     const { task_lists } = this.props; 
     return (
-      <div> Board Name
-        <div style={styles.listContainer}>
-          {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
-          { task_lists.map(list => <TaskList listID={list.id} key={list.id} name={list.name} task_cards={list.task_cards} />)}
-          <ActionButton list />
+      <DragDropContext onDragEnd={this.onDragEnd} >
+        <div> Board Name
+          <div style={styles.listContainer}>
+            {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
+            { task_lists.map(list => <TaskList listID={list.id} key={list.id} name={list.name} task_cards={list.task_cards} />)}
+            <ActionButton list />
+          </div>
+          
         </div>
-        
-      </div>
+      </DragDropContext>
       
     );
   }

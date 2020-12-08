@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react'; 
+import { Droppable } from 'react-beautiful-dnd';
+
 import TaskCard from './TaskCard'; 
 import ActionButton from './ActionButton'; 
 
+
 const TaskList = ({ name, task_cards, listID }) => {
     return (
-        <div style={styles.container}>
-                { name }
-                { task_cards.map(task_card => (<TaskCard key={task_card.id} text={task_card.text} /> )) }
-                <ActionButton listID={listID} />
-        </div>
+        <Droppable droppableId={String(listID)}>
+            {provided => (
+                <div {...provided.droppableProps} ref={provided.innerRef} style={styles.container}>
+                        { name }
+                        { task_cards.map((task_card, index) => (<TaskCard key={task_card.id} index={index} text={task_card.text} id={task_card.id}/> )) }
+                        <ActionButton listID={listID} />
+                        {provided.placeholder}
+                </div>
+            )}
+        </Droppable>
     )
 };
 
