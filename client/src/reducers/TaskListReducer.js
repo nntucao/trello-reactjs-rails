@@ -50,7 +50,7 @@ const TaskListReducer = (state = initialState, action) => {
             listID += 1;
             return [...state, newList];
 
-        case (CONSTANTS.ADD_CARD): 
+        case (CONSTANTS.ADD_CARD): {
             const newCard = {
                 text: action.payload.text, 
                 id: `card-${cardID}`
@@ -69,6 +69,24 @@ const TaskListReducer = (state = initialState, action) => {
             })
 
             return newState;
+        }
+
+            case(CONSTANTS.DRAG_HAPPENED): 
+            const {
+                droppableIdStart, 
+                droppableIdEnd, 
+                droppableIndexStart, 
+                droppableIndexEnd,
+                droppableId
+            } = action.payload; 
+            
+                const newState = [...state];
+                if (droppableIdStart === droppableIdEnd) {
+                    const list = state.find(list => droppableIdStart === list.id);
+                    const card = list.task_cards.splice(droppableIndexStart, 1)
+                    list.task_cards.splice(droppableIndexEnd, 0, ...card)
+                }
+                return newState;
 
         default:  
             return state; 

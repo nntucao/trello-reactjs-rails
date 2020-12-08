@@ -1,14 +1,33 @@
 import { connect } from 'react-redux'; 
 import { React, Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
+import styled from 'styled-components';
 
 import Board from './Board'; 
 import TaskList from './TaskList';
-import ActionButton from './ActionButton'; 
+import ActionButton from './ActionButton';
+import { sort } from '../actions'; 
+
+const ListContainer = styled.div`
+    display: flex;
+    flex-direction: row 
+`; 
 
 class App extends Component {
 
-  onDragEnd = () => {
+  onDragEnd = (result) => {
+    const { destination, source, draggableId } = result; 
+    if (!destination) {
+      return; 
+    }
+
+    this.props.dispatch(sort(
+      source.droppableId, 
+      destination.droppableId, 
+      source.index, 
+      destination.index, 
+      draggableId
+    ))
 
   }
 
@@ -18,27 +37,16 @@ class App extends Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd} >
         <div> Board Name
-          <div style={styles.listContainer}>
+          <ListContainer>
             {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
             { task_lists.map(list => <TaskList listID={list.id} key={list.id} name={list.name} task_cards={list.task_cards} />)}
             <ActionButton list />
-          </div>
-          
+          </ListContainer>
         </div>
       </DragDropContext>
-      
     );
   }
 };
-
-const styles = {
-  listContainer: {
-    display: 'flex', 
-    flexDirection: 'row',
-    marginRight: 8, 
-    marginLeft: 8
-  }
-}
 
 const mapStateToProps = state => ({
   //boards: state.task_boards
