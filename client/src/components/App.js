@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'; 
 import { React, Component } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 import Board from './Board'; 
@@ -16,7 +16,7 @@ const ListContainer = styled.div`
 class App extends Component {
 
   onDragEnd = (result) => {
-    const { destination, source, draggableId } = result; 
+    const { destination, source, draggableId, type } = result; 
     if (!destination) {
       return; 
     }
@@ -26,7 +26,8 @@ class App extends Component {
       destination.droppableId, 
       source.index, 
       destination.index, 
-      draggableId
+      draggableId, 
+      type
     ))
 
   }
@@ -37,11 +38,21 @@ class App extends Component {
     return (
       <DragDropContext onDragEnd={this.onDragEnd} >
         <div> Board Name
-          <ListContainer>
-            {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
-            { task_lists.map(list => <TaskList listID={list.id} key={list.id} name={list.name} task_cards={list.task_cards} />)}
-            <ActionButton list />
-          </ListContainer>
+          <Droppable droppableId='all-lists' direction='horizontal' type='list'>
+            { provided => (
+              <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
+              {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
+              { task_lists.map((list, index) => 
+              <TaskList listID={list.id} 
+                        key={list.id} 
+                        name={list.name} 
+                        task_cards={list.task_cards}
+                        index={index} />)}
+              <ActionButton list />
+            </ListContainer>
+            )}
+            
+          </Droppable>
         </div>
       </DragDropContext>
     );
