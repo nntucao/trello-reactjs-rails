@@ -3,7 +3,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
 import TaskCard from './TaskCard'; 
-import ActionButton from './ActionButton'; 
+import ActionButton from './CardListAction'; 
 
 const ListContainer = styled.div`
     background-color: #dfe3e6;
@@ -13,7 +13,7 @@ const ListContainer = styled.div`
     height: '100%';
     margin-right: 8px
 `
-const TaskList = ({ name, task_cards, listID, index }) => {
+const TaskList = ({ listID, name, cards, index }) => {
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {provided => (
@@ -22,7 +22,7 @@ const TaskList = ({ name, task_cards, listID, index }) => {
                     {provided => (
                         <div {...provided.droppableProps} ref={provided.innerRef}>
                             <h4>{ name }</h4>
-                            { task_cards.map((task_card, index) => (<TaskCard key={task_card.id} index={index} text={task_card.text} id={task_card.id}/> )) }
+                            { cards.map((task_card, index) => (<TaskCard key={task_card.id} index={index} text={task_card.name} id={task_card.id}/> )) }
                             {provided.placeholder}
                             <ActionButton listID={listID} />   
                         </div>

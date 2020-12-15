@@ -1,5 +1,6 @@
-import { React, Component } from 'react'; 
+import { React, Component, useState } from 'react'; 
 import { connect } from 'react-redux';
+import axios from 'axios'; 
 
 import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
@@ -10,9 +11,9 @@ import { addList, addCard } from '../actions';
 
 class ActionButton extends Component {
 
-    state = {
+   state = {
         formOpen: false
-    }; 
+    }
 
     openForm = () => {
         this.setState({ 
@@ -36,12 +37,30 @@ class ActionButton extends Component {
     handleAddList = () => {
         const { dispatch } = this.props; 
         const { text } = this.state; 
-
+    
         if (text) {
             this.setState({
                 text: ""
             })
             dispatch(addList(text));
+
+            axios({
+                method: 'post',
+                responseType: 'json',
+                data: {
+                    'task_list': {
+                        name: this.state.text, 
+                        board_id: 1
+                    }
+                },
+                url: `http://localhost:3001/api/v1/task_lists`, 
+                validateStatus: (status) => {
+                    return true; 
+                },
+              })
+              .then(response => {
+                console.log(response)
+            })
         }
         return; 
     };
@@ -52,12 +71,30 @@ class ActionButton extends Component {
 
         if (text) {
             this.setState({
-                text: ""
+                text: ''
             })
             dispatch(addCard(listID, text));
+            axios({
+                method: 'post',
+                responseType: 'json',
+                data: {
+                    'task_card': {
+                        name: this.state.text, 
+                        task_list_id: 1
+                    }
+                },
+                url: `http://localhost:3001/api/v1/task_cards`, 
+                validateStatus: (status) => {
+                    return true; 
+                },
+              })
+              .then(response => {
+                console.log(response)
+            })
         }
         return; 
     }
+
 
     renderAction = () => {
         const { list } = this.props; 

@@ -26,3 +26,7 @@
 #     UserBoard.create(user_id: 2, board_id: ub)
 #   end
 # end
+
+# TaskList.create!(name: "First Task List Seed", is_archived: false, board_id: 1)
+# TaskCard.create!(name: 'First Task Card Seed', is_archived: false, task_list_id: 1)
+TaskCard.create!(name: 'Seconde Task Card Seed', is_archived: false, task_list_id: 1)
