@@ -28,6 +28,7 @@ function App({dispatch}) {
       .then((data) => {
         console.log(data);
         const lists = data.map((list) => ({
+          id: list.id,
           name: list.name, 
           task_cards: list.task_cards
         }));
@@ -64,12 +65,12 @@ function App({dispatch}) {
             { provided => (
               <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
               {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
-              { task_lists.map((list, index) => 
+              { task_lists.map((list, index) =>  
                 <TaskList listID={list.id} 
                                         key={list.id} 
-                                        name={list.name} 
+                                        text={list.name} 
                                         cards={list.task_cards}
-                                        index={index} />) }  
+                                        index={index} />   ) }  
               <ActionButton list />
             </ListContainer>
             )}

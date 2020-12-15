@@ -73,17 +73,19 @@ class ActionButton extends Component {
             this.setState({
                 text: ''
             })
+            console.log('listID ' + listID);
             dispatch(addCard(listID, text));
+            
             axios({
                 method: 'post',
                 responseType: 'json',
+                url: `http://localhost:3001/api/v1/task_cards`, 
                 data: {
                     'task_card': {
                         name: this.state.text, 
-                        task_list_id: 1
+                        task_list_id: listID
                     }
                 },
-                url: `http://localhost:3001/api/v1/task_cards`, 
                 validateStatus: (status) => {
                     return true; 
                 },
@@ -94,7 +96,6 @@ class ActionButton extends Component {
         }
         return; 
     }
-
 
     renderAction = () => {
         const { list } = this.props; 
@@ -133,18 +134,17 @@ class ActionButton extends Component {
                    padding: '6px 8px 2px',
                    marginBottom: 8
                }}>
-                   
-                <Textarea placeholder={placeholder} 
-                    autoFocus
-                    onBlur={this.closeForm}
-                    value={this.state.text}
-                    onChange={this.handleChangeInput}
-                    style={{
-                        resize: 'none', 
-                        overflow: 'hidden', 
-                        width: '100%', 
-                        outline: 'none', 
-                        border: 'none' }} />
+                    <Textarea placeholder={placeholder} 
+                        autoFocus
+                        onBlur={this.closeForm}
+                        value={this.state.text}
+                        onChange={this.handleChangeInput}
+                        style={{
+                            resize: 'none', 
+                            overflow: 'hidden', 
+                            width: '100%', 
+                            outline: 'none', 
+                            border: 'none' }} />
                </Card>
                <div style={styles.formButtonGroup}>
                     <Button 

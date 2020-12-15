@@ -14,6 +14,7 @@ const ListContainer = styled.div`
     margin-right: 8px
 `
 const TaskList = ({ listID, name, cards, index }) => {
+    console.log('listID in TaskList: ' + listID)
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {provided => (

@@ -11,9 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :boards, only: [:index, :show, :create, :update, :destroy]
       resources :task_lists, only: [:index, :show, :create, :update, :destroy]
-        namespace :task_lists do
-          resources :task_cards, only: [:index, :show, :create, :update, :destroy]
-        end
+      resources :task_cards, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end
