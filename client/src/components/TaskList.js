@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'; 
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
@@ -13,8 +12,7 @@ const ListContainer = styled.div`
     height: '100%';
     margin-right: 8px
 `
-const TaskList = ({ listID, name, cards, index }) => {
-    console.log('listID in TaskList: ' + listID)
+const TaskList = ({ listID, text, cards, index }) => {
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {provided => (
@@ -22,7 +20,7 @@ const TaskList = ({ listID, name, cards, index }) => {
                     <Droppable droppableId={String(listID)}>
                     {provided => (
                         <div {...provided.droppableProps} ref={provided.innerRef}>
-                            <h4>{ name }</h4>
+                            <h4>{ text }</h4>
                             { cards.map((task_card, index) => (<TaskCard key={task_card.id} index={index} text={task_card.name} id={task_card.id}/> )) }
                             {provided.placeholder}
                             <ActionButton listID={listID} />   

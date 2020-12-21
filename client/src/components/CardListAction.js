@@ -29,21 +29,22 @@ class ActionButton extends Component {
     };
 
     handleChangeInput = e => {
+        const textChanges = e.target.value;
         this.setState({
-            text: e.target.value
-        });
+            text: textChanges
+        }); 
     };
 
     handleAddList = () => {
         const { dispatch } = this.props; 
         const { text } = this.state; 
+/*         this.setState({
+            text: ""
+        })   */
+        dispatch(addList(text));
     
         if (text) {
-            this.setState({
-                text: ""
-            })
-            dispatch(addList(text));
-
+            console.log("text input of list: ", text);
             axios({
                 method: 'post',
                 responseType: 'json',
@@ -58,9 +59,7 @@ class ActionButton extends Component {
                     return true; 
                 },
               })
-              .then(response => {
-                console.log(response)
-            })
+              
         }
         return; 
     };
@@ -70,10 +69,6 @@ class ActionButton extends Component {
         const { text } = this.state; 
 
         if (text) {
-            this.setState({
-                text: ''
-            })
-            console.log('listID ' + listID);
             dispatch(addCard(listID, text));
             
             axios({
@@ -98,11 +93,11 @@ class ActionButton extends Component {
     }
 
     renderAction = () => {
-        const { list } = this.props; 
-        const actionName = list ? "Add another list" : "Add another card"; 
-        const buttonTextOpacity = list ? 1 : 0.5; 
-        const buttonTextColor = list ? 'white' : 'inherit'; 
-        const buttonTextBackground = list ? 'rgba(0,0,0,.15)' : 'inherit'; 
+        const { taskList } = this.props; 
+        const actionName = taskList ? "Add another list" : "Add another card"; 
+        const buttonTextOpacity = taskList ? 1 : 0.5; 
+        const buttonTextColor = taskList ? 'white' : 'inherit'; 
+        const buttonTextBackground = taskList ? 'rgba(0,0,0,.15)' : 'inherit'; 
 
         return (
             <div 
@@ -121,10 +116,10 @@ class ActionButton extends Component {
     }
 
     renderForm = () => {
-        const { list } = this.props; 
+        const { taskList } = this.props; 
 
-        const placeholder  = list ? 'Enter list title ...' : 'Enter a title for this card'; 
-        const buttonTitle = list ? 'Add List' : 'Add Card'; 
+        const placeholder  = taskList ? 'Enter list title ...' : 'Enter a title for this card'; 
+        const buttonTitle = taskList ? 'Add List' : 'Add Card'; 
         
         return (
            <div> 
@@ -132,13 +127,12 @@ class ActionButton extends Component {
                    minHeight: 80, 
                    minWidth: 272, 
                    padding: '6px 8px 2px',
-                   marginBottom: 8
-               }}>
+                   marginBottom: 8}}>
                     <Textarea placeholder={placeholder} 
                         autoFocus
                         onBlur={this.closeForm}
-                        value={this.state.text}
                         onChange={this.handleChangeInput}
+                        value={this.state.value}
                         style={{
                             resize: 'none', 
                             overflow: 'hidden', 
@@ -148,7 +142,7 @@ class ActionButton extends Component {
                </Card>
                <div style={styles.formButtonGroup}>
                     <Button 
-                            onMouseDown={list ? this.handleAddList : this.handleAddCard }
+                            onMouseDown={taskList ? this.handleAddList : this.handleAddCard }
                             variant='contained'
                             color='secondary'
                             style={{ color: 'white', backgroundCoulor: '#5aac44'}}> 

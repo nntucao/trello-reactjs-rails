@@ -18,7 +18,7 @@ const TaskCard = ({ text, id, index }) => {
                         <Card>
                             <CardContent>
                                 <Typography gutterBottom>
-                                    { text }
+                                    { text } 
                                 </Typography>
                             </CardContent>
                         </Card>

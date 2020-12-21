@@ -15,8 +15,6 @@ const ListContainer = styled.div`
     flex-direction: row 
 `; 
 
-
-
 function App({dispatch}) {
 
   const [task_lists, setLists] = useState([]);
@@ -66,12 +64,11 @@ function App({dispatch}) {
               <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
               {/* { boards.map(board => <Board name={board.name} task_lists={board.task_lists} /> )} */}
               { task_lists.map((list, index) =>  
-                <TaskList listID={list.id} 
-                                        key={list.id} 
+                <TaskList listID={list.id}  key={list.id} 
                                         text={list.name} 
                                         cards={list.task_cards}
-                                        index={index} />   ) }  
-              <ActionButton list />
+                                        index={index} />   )}  
+                <ActionButton taskList />
             </ListContainer>
             )}
             
