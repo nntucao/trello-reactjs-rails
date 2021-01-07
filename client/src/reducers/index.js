@@ -4,5 +4,5 @@ import TaskListReducer from './TaskListReducer'
 
 export default combineReducers({
     //task_boards: TaskBoardReducer
-    task_lists: TaskListReducer
+    my_task_lists: TaskListReducer
 });  

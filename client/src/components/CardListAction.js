@@ -1,4 +1,4 @@
-import { React, Component, useState } from 'react'; 
+import { React, Component, useEffect } from 'react'; 
 import { connect } from 'react-redux';
 import axios from 'axios'; 
 
@@ -68,9 +68,7 @@ class ActionButton extends Component {
         const { dispatch, listID } = this.props; 
         const { text } = this.state; 
 
-        if (text) {
-            dispatch(addCard(listID, text));
-            
+        if (text) {       
             axios({
                 method: 'post',
                 responseType: 'json',
@@ -88,6 +86,8 @@ class ActionButton extends Component {
               .then(response => {
                 console.log(response)
             })
+
+            dispatch(addCard(listID, text));
         }
         return; 
     }

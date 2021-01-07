@@ -39,7 +39,7 @@ const initialState = [
 ]
 
 const TaskListReducer = (state = initialState, action) => {
-
+    
     switch(action.type) {
         case (CONSTANTS.ADD_LIST): 
             const newList = {
@@ -47,10 +47,35 @@ const TaskListReducer = (state = initialState, action) => {
                 id:  `list-${listID}`,
                 task_cards: []
             }
-            listID += 1;
+            listID += 1; 
             return [...state, newList];
 
+        case (CONSTANTS.REQUEST_TASK_LISTS): 
+            return {
+                ...state, 
+                loading: action.loading
+            }
+
+        case (CONSTANTS.REQUEST_TASK_LISTS_SUCCESS):
+			return {
+				...state,
+				loading: action.loading,
+				tasks: state.tasks.map((task) => {
+					return task.id === task.id ? {
+						...task,
+						text: action.text,
+					} : task
+				}),
+			}
+		case (CONSTANTS.REQUEST_TASK_LISTS_ERROR):
+			return {
+				...state,
+				loading: action.loading,
+				error: action.error,
+			}
+
         case (CONSTANTS.ADD_CARD): {
+            console.log('Input: ', action.payload.text);
             const newCard = {
                 text: action.payload.text, 
                 id: `card-${cardID}`
@@ -66,7 +91,10 @@ const TaskListReducer = (state = initialState, action) => {
                 } else {
                     return list; 
                 }
+                
             })
+
+            
 
             return newState;
         }
@@ -105,9 +133,14 @@ const TaskListReducer = (state = initialState, action) => {
                 return newState;
             }
 
+        
         default:  
             return state; 
     }
 }
 
+const stateConsole =  TaskListReducer(undefined, {})
+const newStateConsole = TaskListReducer(stateConsole, {type: CONSTANTS.ADD_CARD, payload: {text: 'Demo nex State'}} )
+
+console.log('state, new state: ', stateConsole, newStateConsole);
 export default TaskListReducer;
