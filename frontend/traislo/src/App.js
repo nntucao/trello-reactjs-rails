@@ -63,6 +63,29 @@ function App() {
     const listAxios = dataAxios[listId - 1]; //numerotation of list id begins with 1 otherwise the table begins with 0
     listAxios.task_cards = [...listAxios.task_cards, newCard];
 
+    axios({
+      method: 'post',
+      responseType: 'json',
+      data: {
+        'task_card': {
+          name: title,
+          due_date: null,
+          is_archived: false,
+          position_in_tasklist: ''
+        }
+      },
+      url: `http://localhost:3001/api/v1/task_lists/${listId}/task_cards`,
+      validateStatus: (status) => {
+        return true;
+      },
+    })
+      .then(function (response) {
+        console.log('response post card request ', response);
+      })
+      .catch(function (error) {
+        console.log('error post card request ', error);
+      });
+
     const newState = [...dataAxios]
     setDataAxios(newState)
   };
@@ -95,10 +118,10 @@ function App() {
       },
     })
       .then(function (response) {
-        console.log('response post request ', response);
+        console.log('response post list request ', response);
       })
       .catch(function (error) {
-        console.log('error post request ', error);
+        console.log('error post list request ', error);
       });
 
     const newState = [...dataAxios, newList]

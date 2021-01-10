@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :boards, only: [:index, :show, :create, :update, :destroy]
-      resources :task_lists, only: [:index, :show, :create, :update, :destroy]
-      resources :task_cards, only: [:index, :show, :create, :update, :destroy]
+      resources :task_lists, only: [:index, :show, :create, :update, :destroy] do
+        resources :task_cards, only: [:index, :show, :create, :update, :destroy]
+      end
     end
   end
 end
