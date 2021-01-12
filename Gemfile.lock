@@ -113,8 +113,6 @@ GEM
     puma (3.12.6-java)
     rack (2.2.3)
     rack-cors (0.4.0)
-    rack-proxy (0.6.5)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.7)
@@ -175,10 +173,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
-    sqlite3 (1.3.13-x64-mingw32)
-    sqlite3 (1.3.13-x86-mingw32)
-    sqlite3 (1.3.13-x86-mswin32-60)
     thor (1.0.1)
     thread_safe (0.3.6)
     thread_safe (0.3.6-java)
@@ -199,10 +193,6 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (4.3.0)
-      activesupport (>= 4.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 4.2)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-driver (0.6.5-java)
@@ -231,12 +221,10 @@ DEPENDENCIES
   react-rails
   sass-rails (~> 5.0)
   selenium-webdriver
-  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
-  webpacker
 
 BUNDLED WITH
    2.2.0.rc.1
