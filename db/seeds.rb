@@ -27,7 +27,7 @@
 #   end
 # end
 
-#Board.create!(name: "First Board Seed", is_archived: false, uid: 1)
-#TaskList.create!(name: "First Task List Seed", is_archived: false, board_id: 1)
-#TaskCard.create!(name: 'First Task Card Seed', is_archived: false, task_list_id: 1)
-#TaskCard.create!(name: 'Seconde Task Card Seed', is_archived: false, task_list_id: 1)
+Board.create!(name: "First Board Seed", is_archived: false, uid: 1)
+TaskList.create!(name: "First Task List Seed", is_archived: false, board_id: 1)
+TaskCard.create!(name: 'First Task Card Seed', is_archived: false, task_list_id: 1)
+TaskCard.create!(name: 'Seconde Task Card Seed', is_archived: false, task_list_id: 1)
