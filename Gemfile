@@ -39,6 +39,7 @@ gem 'rack-cors', '~> 0.4.0'
 
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'rack-timeout', '~> 0.4.2'
+gem 'friendly_id', '~> 5.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -8,38 +8,43 @@ class Api::V1::UsersController < ApplicationController
     end
   
     def show
-      @task_lists = TaskList.find(params[:id])
-      render json: @task_lists
+      @users = User.find(params[:id])
+      render json: @users
     end
   
     def create
-      @task_lists = TaskList.new(task_lists_params)
+      @users = User.new(users_params)
   
-      if @task_lists.save
-        render json: @task_lists, status: :created
+      if @users.save
+        render json: @users, status: :created
       else
-        render json: @task_lists.errors, status: :unprocessable_entity
+        render json: @users.errors, status: :unprocessable_entity
       end
     end
   
     def update
-      @task_lists = TaskList.find(params[:id])
-      if @task_lists.update(task_lists_params)
-        render json: @task_lists
+      @users = User.find(params[:id])
+      if @users.update(users_params)
+        render json: @users
       else
-        render json: @task_lists.errors, status: :unprocessable_entity
+        render json: @users.errors, status: :unprocessable_entity
       end
     end
   
     def destroy
-      @task_lists = TaskList.find(params[:id])
-      @task_lists.destroy
+      @users = User.find(params[:id])
+      @users.destroy
+    end
+
+    def searchUserForEmail
+      @user = User.where(email: params[:email])
+      render json: @user
     end
   
     private
   
-    def task_lists_params
-      params.require(:task_list).permit(:name, :is_archived, :board_id)
+    def users_params
+      params.require(:user).permit(:name, :is_archived, :board_id, :googleId)
     end
   
     def json_request?
