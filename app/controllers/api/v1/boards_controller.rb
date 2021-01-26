@@ -3,15 +3,21 @@ class Api::V1::BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
   def index
-    # @boards = current_user.boards.all
-    @boads = Board.all
+    @user = User.find(params[:user_id])
+    @boards = @user.boards
+    respond_to { |format|
+      format.json { render :json => @boards.to_json(:include => :task_lists) }
+    }
   end
 
   def show
     # if authorized?
-    respond_to do |format|
-      format.json { render :show }
-    end
+    # respond_to do |format|
+    #   format.json { render :show }
+    # end
+    @user = User.find(params[:user_id])
+    @boards = @user.boards
+    render json: @boards
     # else
     # handle_unauthorized
     # end

@@ -4,7 +4,9 @@ class Api::V1::UsersController < ApplicationController
   
     def index
       @users = User.all
-      render json: @users     
+      respond_to { |format|
+        format.json { render :json => @users.to_json(:include => :boards) }
+      }
     end
   
     def show

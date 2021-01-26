@@ -3,14 +3,18 @@ class Api::V1::TaskListsController < ApplicationController
   respond_to :json
 
   def index
-    @task_lists = TaskList.all
+    @user = User.find(params[:user_id])
+    @boards = @user.boards
+    @task_lists = @boards.task_lists
     respond_to { |format|
       format.json { render :json => @task_lists.to_json(:include => :task_cards) }
     }
   end
 
   def show
-    @task_lists = TaskList.find(params[:id])
+    @user = User.find(params[:user_id])
+    @boards = @user.boards
+    @task_lists = @boards.task_lists
     render json: @task_lists
   end
 
