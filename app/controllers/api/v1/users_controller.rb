@@ -46,7 +46,7 @@ class Api::V1::UsersController < ApplicationController
     private
   
     def users_params
-      params.require(:user).permit(:name, :is_archived, :board_id, :googleId)
+      params.require(:user).permit(:email, :googleId)
     end
   
     def json_request?

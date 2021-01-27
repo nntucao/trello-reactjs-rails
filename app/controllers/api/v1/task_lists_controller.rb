@@ -20,7 +20,6 @@ class Api::V1::TaskListsController < ApplicationController
 
   def create
     @task_lists = TaskList.new(task_lists_params)
-
     if @task_lists.save
       render json: @task_lists, status: :created
     else
