@@ -4,7 +4,7 @@ class Api::V1::TaskListsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @boards = @user.boards
+    @boards = Board.find(params[:board_id])
     @task_lists = @boards.task_lists
     respond_to { |format|
       format.json { render :json => @task_lists.to_json(:include => :task_cards) }
@@ -13,7 +13,7 @@ class Api::V1::TaskListsController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @boards = @user.boards
+    @boards = Board.find(params[:board_id])
     @task_lists = @boards.task_lists
     render json: @task_lists
   end

@@ -3,12 +3,18 @@ class Api::V1::TaskCardsController < ApplicationController
   respond_to :json
 
   def index
-    @task_cards = TaskCard.all
+    @user = User.find(params[:user_id])
+    @boards = Board.find(params[:board_id])
+    @task_lists = TaskList.find(params[:task_list_id])
+    @task_cards = @task_lists.task_cards
     render json: @task_cards
   end
 
   def show
-    @task_cards = TaskCard.find(params[:id])
+    @user = User.find(params[:user_id])
+    @boards = Board.find(params[:board_id])
+    @task_lists = TaskList.find(params[:task_list_id])
+    @task_cards = @task_lists.task_cards
     render json: @task_cards
   end
 

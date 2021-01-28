@@ -7,9 +7,12 @@ class Api::V1::BoardsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @boards = @user.boards
-    respond_to { |format|
-      format.json { render :json => @boards.to_json(:include => :task_lists) }
-    }
+    
+    # respond_to { |format|
+    #   format.json { render :json => @boards.to_json(:include => :task_lists) }
+    # }
+    
+    render json: @boards
   end
 
   def show
@@ -40,8 +43,11 @@ class Api::V1::BoardsController < ApplicationController
     # end
 
     @user = User.find(params[:user_id])
-    @board = @user.boards.create(board_params)
-    @board.user = User.find(params[:user_id])
+    @board = @user.boards.build(board_params)
+    @board.user = @user
+    @user.user_boards.build(user_id: @user.id, board_id: @board.id)
+    @user.boards.push(@board)
+
     if @board.save
       render json: @board, status: :created
     else
