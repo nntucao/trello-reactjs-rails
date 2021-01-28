@@ -19,7 +19,11 @@ class Api::V1::TaskCardsController < ApplicationController
   end
 
   def create
-    @task_cards = TaskCard.new(task_cards_params)
+    @user = User.find(params[:user_id])
+    @boards = Board.find(params[:board_id])
+    @task_lists = TaskList.find(params[:task_list_id])
+    @task_cards = @task_lists.task_cards.build(task_cards_params)
+    @task_cards.task_list = @task_lists
 
     if @task_cards.save
       render json: @task_cards, status: :created
@@ -45,7 +49,7 @@ class Api::V1::TaskCardsController < ApplicationController
   private
 
   def task_cards_params
-    params.require(:task_card).permit(:name, :due_date, :is_archived, :task_list_id)
+    params.require(:task_card).permit(:name, :due_date, :is_archived)
   end
 
   def json_request?
